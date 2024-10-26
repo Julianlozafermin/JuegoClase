@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3mjvpr7i4xkm"]
+
+[ext_resource type="Script" path="res://Trampas/dmg_player.gd" id="1_ng0nr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouivv"]
+size = Vector2(24, 24)
+
+[node name="dmgPlayer" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_ng0nr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_ouivv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,0 +1,344 @@
+[gd_scene load_steps=33 format=3 uid="uid://pu06dt1qm6db"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_7wx7r"]
+[ext_resource type="Texture2D" uid="uid://bei7x67psb4c4" path="res://Assets_PixelAdventure/Main Characters/Mask Dude.png" id="1_j3nbe"]
+[ext_resource type="Script" path="res://Player/StateMachine/stateMachine.gd" id="2_6ao1a"]
+[ext_resource type="Script" path="res://Player/Camera2D.gd" id="3_jd4je"]
+[ext_resource type="Script" path="res://Player/Idle.gd" id="3_jpb8l"]
+[ext_resource type="LabelSettings" uid="uid://bdvb0fryra17f" path="res://Player/GUIText.tres" id="4_82gnj"]
+[ext_resource type="Script" path="res://Player/Moving.gd" id="4_geplr"]
+[ext_resource type="Script" path="res://Player/enAire.gd" id="5_epf1u"]
+[ext_resource type="AudioStream" uid="uid://ba2hxqf376lg" path="res://Assets_PixelAdventure/Sounds/Jump.ogg" id="6_sfuhr"]
+[ext_resource type="Script" path="res://Player/takeDamage.gd" id="6_tsfye"]
+[ext_resource type="AudioStream" uid="uid://bk01bmd5p2v58" path="res://Assets_PixelAdventure/Sounds/Hit.ogg" id="7_jbpay"]
+[ext_resource type="Script" path="res://Player/wallSlide.gd" id="7_wtfs0"]
+[ext_resource type="Script" path="res://Player/wallJump.gd" id="8_m8aaa"]
+[ext_resource type="Script" path="res://Player/Dash.gd" id="9_6vd1m"]
+[ext_resource type="Texture2D" uid="uid://ckaore37h130l" path="res://Assets_PixelAdventure/Menu/UI/lifebar-1.png" id="9_lqse5"]
+[ext_resource type="Texture2D" uid="uid://53mh0rvj54b1" path="res://Assets_PixelAdventure/Menu/UI/lifebar-2.png" id="10_tt2yj"]
+[ext_resource type="Texture2D" uid="uid://6bsfvret8xj" path="res://Assets_PixelAdventure/Items/Fruits/CherryIcon.png" id="11_mb6xt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_82qkg"]
+font_size = 10
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xso2"]
+size = Vector2(18, 23)
+
+[sub_resource type="Animation" id="Animation_er5ni"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_htrfu"]
+resource_name = "fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_wpobu"]
+resource_name = "herido"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 38, 39, 40, 41, 42]
+}
+
+[sub_resource type="Animation" id="Animation_xbbfj"]
+resource_name = "idle"
+length = 1.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="Animation" id="Animation_r4naw"]
+resource_name = "jump"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [23]
+}
+
+[sub_resource type="Animation" id="Animation_pidi8"]
+resource_name = "jumpCaer"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [24]
+}
+
+[sub_resource type="Animation" id="Animation_cf0y2"]
+resource_name = "jumpDoble"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [25, 26, 27, 28, 29, 30]
+}
+
+[sub_resource type="Animation" id="Animation_qixn3"]
+resource_name = "walk"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+}
+
+[sub_resource type="Animation" id="Animation_ocim2"]
+resource_name = "wallSlide"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [31, 33]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hvk0d"]
+_data = {
+"RESET": SubResource("Animation_er5ni"),
+"fall": SubResource("Animation_htrfu"),
+"herido": SubResource("Animation_wpobu"),
+"idle": SubResource("Animation_xbbfj"),
+"jump": SubResource("Animation_r4naw"),
+"jumpCaer": SubResource("Animation_pidi8"),
+"jumpDoble": SubResource("Animation_cf0y2"),
+"walk": SubResource("Animation_qixn3"),
+"wallSlide": SubResource("Animation_ocim2")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wxrcf"]
+texture = ExtResource("9_lqse5")
+region_rect = Rect2(0, 0, 96, 32)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_m1qvs"]
+texture = ExtResource("10_tt2yj")
+region_rect = Rect2(0, 0, 96, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_menop"]
+size = Vector2(20, 25)
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 6
+script = ExtResource("1_7wx7r")
+
+[node name="LabelState" type="Label" parent="."]
+z_index = 10
+offset_left = -9.0
+offset_top = -28.0
+offset_right = 38.0
+offset_bottom = -2.0
+text = "aaaaa"
+label_settings = SubResource("LabelSettings_82qkg")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_6ao1a")
+estado_inicial = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("3_jpb8l")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="Moving" type="Node" parent="StateMachine"]
+script = ExtResource("4_geplr")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="enAire" type="Node" parent="StateMachine"]
+script = ExtResource("5_epf1u")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="BufferJumpTimer" type="Timer" parent="StateMachine/enAire"]
+wait_time = 0.1
+one_shot = true
+
+[node name="CoyoteTimer" type="Timer" parent="StateMachine/enAire"]
+wait_time = 0.2
+one_shot = true
+
+[node name="takeDamage" type="Node" parent="StateMachine"]
+script = ExtResource("6_tsfye")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="wallSlide" type="Node" parent="StateMachine"]
+script = ExtResource("7_wtfs0")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="wallJump" type="Node" parent="StateMachine"]
+script = ExtResource("8_m8aaa")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="Dash" type="Node" parent="StateMachine"]
+script = ExtResource("9_6vd1m")
+anim_player_path = NodePath("../../AnimationPlayer")
+
+[node name="DashTimer" type="Timer" parent="StateMachine/Dash"]
+wait_time = 0.2
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_j3nbe")
+hframes = 11
+vframes = 4
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_6xso2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_hvk0d")
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.7, 0.7)
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.37
+drag_top_margin = 0.26
+drag_right_margin = 0.4
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("3_jd4je")
+
+[node name="PlayerGUI" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerGUI"]
+offset_top = 18.0
+offset_right = 41.0
+offset_bottom = 50.0
+
+[node name="FrutasLabel2" type="TextureRect" parent="PlayerGUI/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("11_mb6xt")
+
+[node name="FrutasLabel" type="Label" parent="PlayerGUI/HBoxContainer"]
+layout_mode = 2
+text = "0"
+label_settings = ExtResource("4_82gnj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerGUI"]
+clip_contents = true
+offset_left = 9.0
+offset_top = 7.0
+offset_right = 74.0
+offset_bottom = 33.0
+
+[node name="HPProgressBar" type="ProgressBar" parent="PlayerGUI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0)
+theme_override_styles/background = SubResource("StyleBoxTexture_wxrcf")
+theme_override_styles/fill = SubResource("StyleBoxTexture_m1qvs")
+max_value = 10.0
+value = 6.28
+
+[node name="RaycastDmg" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="RaycastDmg"]
+position = Vector2(1, 1)
+target_position = Vector2(0, 23)
+collision_mask = 2
+
+[node name="RayCast2D2" type="RayCast2D" parent="RaycastDmg"]
+position = Vector2(10, 1)
+target_position = Vector2(0, 23)
+collision_mask = 2
+
+[node name="RayCast2D3" type="RayCast2D" parent="RaycastDmg"]
+position = Vector2(-9, 1)
+target_position = Vector2(0, 23)
+collision_mask = 2
+
+[node name="AudioSalto" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_sfuhr")
+
+[node name="AudioHerirse" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_jbpay")
+
+[node name="RecibirDanio" type="Area2D" parent="." groups=["AreaPlayer"]]
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RecibirDanio"]
+position = Vector2(1, 4.5)
+shape = SubResource("RectangleShape2D_menop")
+
+[connection signal="timeout" from="StateMachine/Dash/DashTimer" to="StateMachine/Dash" method="_on_dash_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="StateMachine/takeDamage" method="_on_animation_player_animation_finished"]

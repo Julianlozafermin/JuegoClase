@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://qkmt0ftiyjnj"]
+
+[ext_resource type="Texture2D" uid="uid://i6s3gmq6sfr4" path="res://Assets_PixelAdventure/Traps/Platforms/Brown Off.png" id="1_6nc5y"]
+[ext_resource type="Script" path="res://Test/Path2D.gd" id="1_khqvp"]
+
+[sub_resource type="Curve2D" id="Curve2D_sd31m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -49, -19, 0, 0, 0, 0, 12, -33, 0, 0, 0, 0, 78, -5, 0, 0, 0, 0, 101, 43, 0, 0, 0, 0, -5, 61, 0, 0, 0, 0, -64, 44, 0, 0, 0, 0, -49, -19)
+}
+point_count = 7
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j2prh"]
+size = Vector2(32, 7)
+
+[node name="TestScene" type="Node"]
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(170, 93)
+curve = SubResource("Curve2D_sd31m")
+script = ExtResource("1_khqvp")
+
+[node name="MovingPlatforn" type="CharacterBody2D" parent="Path2D"]
+position = Vector2(30.2414, -25.2612)
+
+[node name="BrownOff" type="Sprite2D" parent="Path2D/MovingPlatforn"]
+texture = ExtResource("1_6nc5y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/MovingPlatforn"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_j2prh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(31.534, -24.7129)
+rotation = 0.401228
+progress = 83.8048

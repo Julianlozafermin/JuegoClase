@@ -1,0 +1,102 @@
+[gd_scene load_steps=9 format=3 uid="uid://cas78vxyynoqw"]
+
+[ext_resource type="Script" path="res://Maps/main_menu.gd" id="1_i1wkj"]
+[ext_resource type="FontFile" uid="uid://6kevsfysjxx2" path="res://Assets_PixelAdventure/Fonts/NokiaCellphoneFC.ttf" id="2_sv2xo"]
+[ext_resource type="Texture2D" uid="uid://cx1qsqa4qwsus" path="res://Assets_PixelAdventure/Parallax/parallax-00.png" id="3_sore7"]
+[ext_resource type="Texture2D" uid="uid://d02l7nnnfajd3" path="res://Assets_PixelAdventure/Parallax/parallax-01.png" id="4_wca10"]
+[ext_resource type="Texture2D" uid="uid://cqgs3aseyvj8m" path="res://Assets_PixelAdventure/Parallax/parallax-02.png" id="5_xb6nv"]
+[ext_resource type="Texture2D" uid="uid://cvngflsps17db" path="res://Assets_PixelAdventure/Parallax/parallax-03.png" id="6_x5kat"]
+[ext_resource type="Texture2D" uid="uid://owlwdggvbxt3" path="res://Assets_PixelAdventure/Parallax/parallax-04.png" id="7_ubh51"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_eat6h"]
+font = ExtResource("2_sv2xo")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Main_Menu" type="Node"]
+script = ExtResource("1_i1wkj")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 14.0
+offset_top = 22.0
+offset_right = 418.0
+offset_bottom = 91.0
+text = "PLATAFORMAS CHIDORIS DEL DIABLO PERO
+EL DIABLO NO PORQUE ES MALO ENTONCES
+MEJOR DE DIOS"
+label_settings = SubResource("LabelSettings_eat6h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 158.0
+offset_top = 127.0
+offset_right = 268.0
+offset_bottom = 228.0
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+offset_right = 110.0
+offset_bottom = 31.0
+text = "START"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+offset_top = 35.0
+offset_right = 110.0
+offset_bottom = 66.0
+text = "EXIT"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+offset_top = 70.0
+offset_right = 110.0
+offset_bottom = 101.0
+text = "FULL SCREEN
+"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+scroll_base_offset = Vector2(0, 200)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("3_sore7")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_wca10")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("5_xb6nv")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("6_x5kat")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1008, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("7_ubh51")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(214, 117)
+current = true
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]
