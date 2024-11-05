@@ -28,6 +28,3 @@ func save_data():
 	var file = FileAccess.open(SAVEFILE,FileAccess.WRITE)
 	file.store_var(game_data)
 	file = null 
-
-
-
